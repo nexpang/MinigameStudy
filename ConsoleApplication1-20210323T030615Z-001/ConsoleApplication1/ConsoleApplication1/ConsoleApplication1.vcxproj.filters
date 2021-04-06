@@ -24,5 +24,8 @@
     <ClCompile Include="cardPicker.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="music_game.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

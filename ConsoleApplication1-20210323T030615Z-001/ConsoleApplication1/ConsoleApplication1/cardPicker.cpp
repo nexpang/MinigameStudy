@@ -50,7 +50,7 @@ int main()
         cout << endl;
     }*/
     for (int i = 0; i < num; i++) {
-        gotoXY((i % 5)*5, i / 5);
+        gotoXY((i % 5) * 5, i / 5);
         cout << Number[i];
     }
     Sleep(3000);
@@ -80,9 +80,16 @@ int main()
                 for (int i = 0; i < num; i++) {
                     gotoXY((i % 5) * 5, i / 5);
                     if (((x / 5) + (y * 5)) == i) {
-                        cout << Number[i];
+                        if (Number[i] == 0) {
+                            cout << " ";
+                            check = false;
+                        }
+                        else {
+                            cout << Number[i];
+                            check = true;
+                        }
                     }
-                    else if(Number[i]==0){
+                    else if (Number[i] == 0) {
                         cout << " ";
                     }
                     else {
@@ -94,37 +101,53 @@ int main()
             else {
                 for (int i = 0; i < num; i++) {
                     gotoXY((i % 5) * 5, i / 5);
-                    if (((x / 5) + (y * 5)) == i || saveCheck == i) {
-                        cout << Number[i];
+                    if (((x / 5) + (y * 5)) == i) {
+                        if (Number[i] == 0) {
+                            cout << " ";
+                            check = true;
+                        }
+                        else {
+                            cout << Number[i];
+                            check = false;
+                        }
                     }
                     else if (Number[i] == 0) {
                         cout << " ";
                     }
-                    else {
+                    else if (saveCheck != i) {
                         cout << "?";
+                    }
+                    if (saveCheck == i && saveCheck != (x / 5) + (y * 5)) {
+                        cout << Number[i];
                     }
                 }
                 if (Number[x / 5 + y * 5] == Number[saveCheck]) {
-                    Number[x / 5 + y * 5] = 0;
-                    Number[saveCheck] = 0;
+                    if (saveCheck != (x / 5) + (y * 5)) {
+                        Number[x / 5 + y * 5] = 0;
+                        Number[saveCheck] = 0;
+                    }
+                    else {
+                        cout << "\n 같은 카드를 누르지 마시오" << endl;
+                    }
                 }
-                Sleep(1000);
+                if (check == false)
+                    Sleep(500);
                 system("cls");
                 for (int i = 0; i < num; i++) {
                     gotoXY((i % 5) * 5, i / 5);
                     if (Number[i] == 0) {
                         cout << " ";
                     }
+                    else if (saveCheck == i && check == true) {
+                        cout << Number[i];
+                    }
                     else {
                         cout << "?";
                     }
                 }
-                saveCheck = 0;
+                if (check == false)
+                    saveCheck = 0;
             }
-            if (check)
-                check = false;
-            else
-                check = true;
             int total = 0;
             for (int i = 0; i < num; i++) {
                 if (Number[i] == 0)
@@ -132,7 +155,7 @@ int main()
             }
             // 이김
             if (total == 20) {
-                cout << "\n끝";
+                cout << "\nWIN\n끝";
                 return 0;
             }
         }
@@ -147,13 +170,13 @@ int main()
                 break;
             case 80:
                 //cout << "아래";
-                if (y < 4) {
-                    y ++;
+                if (y < 3) {
+                    y++;
                 }
                 break;
             case 77:
                 //cout << "오른쪽";
-                if (x < 21) {
+                if (x < 20) {
                     x += 5;
                 }
                 break;
