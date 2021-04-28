@@ -1,6 +1,4 @@
-﻿//20303 김경혁
-// 기몬, 심화 과제 모두했습니다
-#include <iostream>
+﻿#include <iostream>
 #include <conio.h>
 #include <string.h>
 #include <Windows.h>
@@ -91,6 +89,34 @@ void displayScreen()
 	gotoXY(20, 6);
 	cout << "횟수 : " << TotalMove;
 }
+bool checkPullBlock(int posX, int posY, int dir_x, int dir_y) {
+	if (BackGrdMap[CurrentY + dir_y + posY][CurrentX + posX + dir_x] == '+' || BackGrdMap[CurrentY + posY + dir_y][CurrentX + posX + dir_x] == '0') {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+void movePullBlock(int posX, int posY, int dir_x, int dir_y) {
+	if (ShowMap[CurrentY + posY][CurrentX + posX] == '.') {
+		BackGrdMap[CurrentY + posY][CurrentX + posX] = '.';
+		gotoXY(CurrentX + posX, CurrentY + posY);
+		_putch('.');
+	}
+	else if (ShowMap[CurrentY + posY][CurrentX + posX] == '@') {
+		BackGrdMap[CurrentY + posY][CurrentX + posX] = '@';
+		gotoXY(CurrentX + posX, CurrentY + posY);
+		_putch('@');
+	}
+	else {
+		BackGrdMap[CurrentY + posY][CurrentX + posX] = ' ';
+		gotoXY(CurrentX + posX, CurrentY + posY);
+		_putch(' ');
+	}
+	BackGrdMap[CurrentY + posY + dir_y][CurrentX + posX + dir_x] = '8';
+	gotoXY(CurrentX + posX + dir_x, CurrentY + posY + dir_y);
+	_putch('8');
+}
 
 void move(int dir)
 {
@@ -121,10 +147,10 @@ void move(int dir)
 			{
 				if (ShowMap[CurrentY + dir_y][CurrentX + dir_x] == '.') {
 					BackGrdMap[CurrentY + dir_y][CurrentX + dir_x] = '.';
-					gotoXY(CurrentX+dir_x, CurrentY +dir_y);
+					gotoXY(CurrentX + dir_x, CurrentY + dir_y);
 					_putch('.');
 				}
-				else if(ShowMap[CurrentY + dir_y][CurrentX + dir_x] == '@'){
+				else if (ShowMap[CurrentY + dir_y][CurrentX + dir_x] == '@') {
 					BackGrdMap[CurrentY + (dir_y)][CurrentX + (dir_x)] = '@';
 					gotoXY(CurrentX + dir_x, CurrentY + dir_y);
 					_putch('@');
@@ -176,103 +202,31 @@ void move(int dir)
 			}
 		}
 		if (bPull) {
+			int posX = 0, posY = 0;
 			switch (dPull)
 			{
 			case 1:
-				if (BackGrdMap[CurrentY - 1 + dir_y][CurrentX + dir_x] == '+' || BackGrdMap[CurrentY - 1 + dir_y][CurrentX + dir_x] == '0') {
-					return;
-				}
-				if (ShowMap[CurrentY - 1][CurrentX] == '.') {
-					BackGrdMap[CurrentY - 1][CurrentX] = '.';
-					gotoXY(CurrentX, CurrentY - 1);
-					_putch('.');
-				}
-				else if (ShowMap[CurrentY - 1][CurrentX] == '@') {
-					BackGrdMap[CurrentY - 1][CurrentX] = '@';
-					gotoXY(CurrentX, CurrentY - 1);
-					_putch('@');
-				}
-				else {
-					BackGrdMap[CurrentY - 1][CurrentX] = ' ';
-					gotoXY(CurrentX, CurrentY - 1);
-					_putch(' ');
-				}
-				BackGrdMap[CurrentY - 1 + dir_y][CurrentX + dir_x] = '8';
-				gotoXY(CurrentX + dir_x, CurrentY - 1 + dir_y);
-				_putch('8');
+				posX = 0;
+				posY = -1;
 				break;
 			case 2:
-				if (BackGrdMap[CurrentY + dir_y][CurrentX+1 + dir_x] == '+' || BackGrdMap[CurrentY + dir_y][CurrentX+1 + dir_x] == '0') {
-					return;
-				}
-				if (ShowMap[CurrentY][CurrentX+1] == '.') {
-					BackGrdMap[CurrentY][CurrentX+1] = '.';
-					gotoXY(CurrentX+1, CurrentY);
-					_putch('.');
-				}
-				else if (ShowMap[CurrentY][CurrentX+1] == '@') {
-					BackGrdMap[CurrentY][CurrentX+1] = '@';
-					gotoXY(CurrentX+1, CurrentY);
-					_putch('@');
-				}
-				else {
-					BackGrdMap[CurrentY][CurrentX+1] = ' ';
-					gotoXY(CurrentX+1, CurrentY);
-					_putch(' ');
-				}
-				BackGrdMap[CurrentY+ dir_y][CurrentX+1 + dir_x] = '8';
-				gotoXY(CurrentX+1 + dir_x, CurrentY + dir_y);
-				_putch('8');
+				posX = 1;
+				posY = 0;
 				break;
 			case 3:
-				if (BackGrdMap[CurrentY + 1 + dir_y][CurrentX + dir_x] == '+' || BackGrdMap[CurrentY + 1 + dir_y][CurrentX + dir_x] == '0') {
-					return;
-				}
-				if (ShowMap[CurrentY + 1][CurrentX] == '.') {
-					BackGrdMap[CurrentY + 1][CurrentX] = '.';
-					gotoXY(CurrentX, CurrentY + 1);
-					_putch('.');
-				}
-				else if (ShowMap[CurrentY + 1][CurrentX] == '@') {
-					BackGrdMap[CurrentY + 1][CurrentX] = '@';
-					gotoXY(CurrentX, CurrentY + 1);
-					_putch('@');
-				}
-				else {
-					BackGrdMap[CurrentY + 1][CurrentX] = ' ';
-					gotoXY(CurrentX, CurrentY + 1);
-					_putch(' ');
-				}
-				BackGrdMap[CurrentY + 1 + dir_y][CurrentX + dir_x] = '8';
-				gotoXY(CurrentX + dir_x, CurrentY + 1 + dir_y);
-				_putch('8');
+				posX = 0;
+				posY = 1;
 				break;
 			case 4:
-				if (BackGrdMap[CurrentY+ dir_y][CurrentX - 1 + dir_x] == '+' || BackGrdMap[CurrentY + dir_y][CurrentX -1 + dir_x] == '0') {
-					return;
-				}
-				if (ShowMap[CurrentY][CurrentX - 1] == '.') {
-					BackGrdMap[CurrentY][CurrentX - 1] = '.';
-					gotoXY(CurrentX - 1, CurrentY);
-					_putch('.');
-				}
-				else if (ShowMap[CurrentY][CurrentX - 1] == '@') {
-					BackGrdMap[CurrentY][CurrentX - 1] = '@';
-					gotoXY(CurrentX - 1, CurrentY);
-					_putch('@');
-				}
-				else {
-					BackGrdMap[CurrentY][CurrentX - 1] = ' ';
-					gotoXY(CurrentX - 1, CurrentY);
-					_putch(' ');
-				}
-				BackGrdMap[CurrentY + dir_y][CurrentX - 1 + dir_x] = '8';
-				gotoXY(CurrentX - 1 + dir_x, CurrentY + dir_y);
-				_putch('8');
+				posX = -1;
+				posY = 0;
 				break;
 			default:
 				break;
 			}
+			if (checkPullBlock(posX, posY, dir_x, dir_y))
+				return;
+			movePullBlock(posX, posY, dir_x, dir_y);
 		}
 		CurrentX += dir_x;
 		CurrentY += dir_y;
@@ -342,19 +296,19 @@ int main()
 				}
 				if (ch == 'p')
 				{
-					int check=0;
+					int check = 0;
 					if (BackGrdMap[CurrentY - 1][CurrentX] == '0')
 						check++;
-					if (BackGrdMap[CurrentY][CurrentX+1] == '0')
+					if (BackGrdMap[CurrentY][CurrentX + 1] == '0')
 						check++;
 					if (BackGrdMap[CurrentY + 1][CurrentX] == '0')
 						check++;
-					if (BackGrdMap[CurrentY][CurrentX-1] == '0')
+					if (BackGrdMap[CurrentY][CurrentX - 1] == '0')
 						check++;
 					if (check > 1) {
 						continue;
 					}
-					if (bPull && dPull!=0) {
+					if (bPull && dPull != 0) {
 						switch (dPull)
 						{
 						case 1:
@@ -362,16 +316,16 @@ int main()
 							gotoXY(CurrentX, CurrentY - 1);
 							break;
 						case 2:
-							BackGrdMap[CurrentY][CurrentX+1] = '0';
-							gotoXY(CurrentX+1, CurrentY);
+							BackGrdMap[CurrentY][CurrentX + 1] = '0';
+							gotoXY(CurrentX + 1, CurrentY);
 							break;
 						case 3:
 							BackGrdMap[CurrentY + 1][CurrentX] = '0';
 							gotoXY(CurrentX, CurrentY + 1);
 							break;
 						case 4:
-							BackGrdMap[CurrentY][CurrentX-1] = '0';
-							gotoXY(CurrentX-1, CurrentY);
+							BackGrdMap[CurrentY][CurrentX - 1] = '0';
+							gotoXY(CurrentX - 1, CurrentY);
 							break;
 						default:
 							break;
@@ -395,16 +349,16 @@ int main()
 							bPull = true;
 							dPull = 3;
 						}
-						else if (BackGrdMap[CurrentY][CurrentX+1] == '0') {
-							BackGrdMap[CurrentY][CurrentX+1] = '8';
-							gotoXY(CurrentX+1, CurrentY);
+						else if (BackGrdMap[CurrentY][CurrentX + 1] == '0') {
+							BackGrdMap[CurrentY][CurrentX + 1] = '8';
+							gotoXY(CurrentX + 1, CurrentY);
 							_putch('8');
 							bPull = true;
 							dPull = 2;
 						}
-						else if (BackGrdMap[CurrentY][CurrentX-1] == '0') {
-							BackGrdMap[CurrentY][CurrentX-1] = '8';
-							gotoXY(CurrentX-1, CurrentY);
+						else if (BackGrdMap[CurrentY][CurrentX - 1] == '0') {
+							BackGrdMap[CurrentY][CurrentX - 1] = '8';
+							gotoXY(CurrentX - 1, CurrentY);
 							_putch('8');
 							bPull = true;
 							dPull = 4;
