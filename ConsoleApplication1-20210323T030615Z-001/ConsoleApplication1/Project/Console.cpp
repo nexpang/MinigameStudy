@@ -1,6 +1,11 @@
-#include <conio.h>
-
+#include <Windows.h>
 #include "Console.h"
+
+void setConsoleView()
+{
+	system("mode con:cols=70 lines=30");
+	system("title COLOR SHOOTER");
+}
 
 void gotoXY(int x, int y)
 {
@@ -24,10 +29,4 @@ void clrscr()
 
 void beep(int tone, int delay) {
 	Beep(tone, delay);
-}
-
-int getKeyDown() {
-	if (_kbhit() != 0) {
-		return _getch();
-	}
 }
