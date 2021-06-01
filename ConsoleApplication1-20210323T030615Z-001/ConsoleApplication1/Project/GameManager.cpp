@@ -4,6 +4,12 @@
 #include <stdlib.h>
 #include <iostream>
 
+void GameManager::startGame() {
+	score = 0;
+	hp = 3;
+}
+
+
 void GameManager::setColors() {
 	int arr[14] = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14 };
 
@@ -38,8 +44,25 @@ void GameManager::setColors() {
 }
 
 
-void GameManager::showColors(int x, int y) {
-	gotoXY(x, y);
+void GameManager::DestroyWall(int x, bool isEnemy) {
+	if (isEnemy) {
+		if (wall[x] == 0) {
+			hp--;
+		}
+		else
+			wall[x] = 0;
+	}
+	else {
+		wall[x] = 1;
+		score++;
+	}
+}
+
+
+
+void GameManager::showUI() {
+	int x = 15;
+	gotoXY(x, 0);
 	std::cout << "ENEMY:";
 	for (int i = 0; i < sizeof(enemyColor)/sizeof(int); i++)
 	{
@@ -47,7 +70,7 @@ void GameManager::showColors(int x, int y) {
 		std::cout << "■";
 	}
 	setTextColor(15);
-	gotoXY(x, y+1);
+	gotoXY(x, 1);
 	std::cout << "TEAM :";
 	for (int i = 0; i < sizeof(teamColor) / sizeof(int); i++)
 	{
@@ -55,10 +78,24 @@ void GameManager::showColors(int x, int y) {
 		std::cout << "■";
 	}
 	setTextColor(15);
-	gotoXY(x, y + 3);
-	std::cout << "스코어: "<<0;
-	gotoXY(x, y + 4);
-	std::cout << "종료: Q";
+	gotoXY(x, 3);
+	std::cout << "HP	: "<< hp;
+	gotoXY(x, 4);
+	std::cout << "SOCRE	: " << score;
+	gotoXY(x, 5);
+	std::cout << "EXIT	: Q";
+
+	gotoXY(x, 8);
+	std::cout << "HELP";
+	gotoXY(x, 9);
+	std::cout << "ATTACK	: SPACE";
+	gotoXY(x, 10);
+	std::cout << "MOVE	: RIGHT, LEFT ARROW";
+
+	gotoXY(x, 12);
+	std::cout << "ENEMY	: destroy wall, kill them!";
+	gotoXY(x, 13);
+	std::cout << "TEAM	: repair wall, don't Shoot!";
 }
 
 void GameManager::drawDisplay() {
@@ -89,8 +126,19 @@ void GameManager::drawDisplay() {
 	std::cout << "|                            |" << std::endl;
 	std::cout << "|                            |" << std::endl;
 	std::cout << "|                            |" << std::endl;
-	showColors(30, 1);
-	gotoXY(30, 26);
+	gotoXY(29, 26);
+}void GameManager::drawWall() {
+	gotoXY(0, 26);
+	for (int i = 0; i < sizeof(wall)/sizeof(int); i++)
+	{
+		if (wall[i] == 1) {
+			std::cout << "☆";
+		}
+		else {
+			std::cout << "  ";
+		}
+	}
+	gotoXY(32, 26);
 }
 
 

@@ -12,7 +12,7 @@ void gotoXY(int x, int y)
 	HANDLE hOut;
 	COORD Cur;
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	Cur.X = x;
+	Cur.X = x*2;
 	Cur.Y = y;
 	SetConsoleCursorPosition(hOut, Cur);
 }

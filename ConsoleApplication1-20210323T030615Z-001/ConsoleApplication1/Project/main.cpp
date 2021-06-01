@@ -9,6 +9,11 @@
 #include "CPlayer.h"
 #include "CEnemy.h"
 
+#define UP		72
+#define DOWN	80
+#define LEFT	75
+#define RIGHT	77
+
 using namespace std;
 
 vector<CEnemy> units, myBulletes;
@@ -22,6 +27,8 @@ int getKeyDown()
 
 	return 0;
 }
+
+void checkDirection(CPlayer*);
 
 int main() {
 	srand((unsigned)time(NULL));
@@ -43,6 +50,7 @@ int main() {
 	CPlayer *p = new CPlayer();
 	int key;
 
+	gm->startGame();
 	gm->setColors();
 	p->SetPlayer();
 	while (1) {
@@ -59,11 +67,14 @@ int main() {
 
 			myBulletes.push_back(bullet);
 		}
-		else if (key == 107) {//哭率
-			p->Move(-2);
+		else if (key == 0xE0)
+		{
+			checkDirection(p);
+		}if (key == 107) {//哭率
+			p->Move(-1);
 		}
 		else if(key == 109) {//坷弗率
-			p->Move(2);
+			p->Move(1);
 		}
 
 		if (rand() % 100 < 10) {
@@ -75,6 +86,7 @@ int main() {
 
 
 		gm->drawDisplay();
+		gm->drawWall();
 		for (int i = 0; i < (int)units.size(); i++)
 		{
 			units[i].moveEnemy();
@@ -86,11 +98,12 @@ int main() {
 			myBulletes[i].drawEnemy();
 		}
 		p->ShowPlayer();
-		
+		gm->showUI();
 		// 面倒
 		for (int i = 0; i < (int)units.size(); i++)
 		{
 			if (units[i].checkEnd()) {
+				gm->DestroyWall(units[i].getX(), units[i].getisEnemy());
 				units.erase(units.begin() + i);
 				i--;
 			}
@@ -103,8 +116,36 @@ int main() {
 			}
 		}
 
-		Sleep(1000 / 20);
+		Sleep(1000 / 10);
 		clrscr();
 	}
 	return 0;
+}
+
+void checkDirection(CPlayer* p)
+{
+	int key = _getch();
+
+	switch (key)
+	{
+	case UP:
+		break;
+	case DOWN:
+		break;
+	case LEFT:
+		if (p->GetX() > 0)
+		{
+			p->Move(-1);
+		}
+		break;
+	case RIGHT:
+		if (p->GetX() < 19)
+		{
+			p->Move(1);
+		}
+		break;
+
+	default:
+		break;
+	}
 }

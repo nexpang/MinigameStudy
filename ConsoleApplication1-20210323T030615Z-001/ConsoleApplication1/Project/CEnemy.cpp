@@ -8,7 +8,7 @@ using namespace std;
 
 void CEnemy::setEnemy(int _x, int enemy, int team) {
 	if (_x == -1) {
-		x = ((rand() % (14))*2)+1;
+		x = rand() % 13 + 1;
 		y = 0;
 
 		// ÆÀÀÎÁö ÀûÀÎÁö ·£´ı
@@ -53,6 +53,15 @@ void CEnemy::drawEnemy() {
 		cout << "¡Ù";
 	}
 	setTextColor(15);
+}
+
+int CEnemy::getX()
+{
+	return x;
+}
+bool CEnemy::getisEnemy()
+{
+	return isEnemy;
 }
 
 bool CEnemy::checkEnd() {

@@ -54,6 +54,15 @@
     <ClCompile Include="CMissile.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="jongShooting.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CNote.h">
@@ -63,6 +72,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CMissile.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CBullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

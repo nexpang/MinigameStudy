@@ -14,6 +14,9 @@ public:
 	void moveEnemy();
 	void drawEnemy();
 
+	int getX();
+	bool getisEnemy();
+
 	bool checkEnd();
 };
 
