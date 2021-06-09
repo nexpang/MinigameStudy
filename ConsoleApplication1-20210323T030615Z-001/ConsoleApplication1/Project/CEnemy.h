@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 class CEnemy
 {
 private:
@@ -15,8 +17,10 @@ public:
 	void drawEnemy();
 
 	int getX();
+	int getY();
 	bool getisEnemy();
 
+	bool checkBullet(int x, int y);
 	bool checkEnd();
 };
 

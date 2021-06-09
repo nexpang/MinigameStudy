@@ -59,11 +59,21 @@ int CEnemy::getX()
 {
 	return x;
 }
+int CEnemy::getY()
+{
+	return y;
+}
 bool CEnemy::getisEnemy()
 {
 	return isEnemy;
 }
 
+bool CEnemy::checkBullet(int x, int y) {
+	if (this->x == x && (this->y == y || this->y+1 == y)) {
+		return true;
+	}
+	return false;
+}
 bool CEnemy::checkEnd() {
 	if (bMoveDown) {
 		if (y > 24) {
