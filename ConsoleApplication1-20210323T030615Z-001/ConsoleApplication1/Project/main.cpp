@@ -71,8 +71,8 @@ int main() {
 		else if (key == 'r') {
 			initGame();
 		}
-		else if (key == 'a') {
-			gm->setColors();
+		else if (key == 'a') {// 디버그 코드
+			//gm->setColors();
 		}
 		else if (key == ' ') {
 			CEnemy bullet;
