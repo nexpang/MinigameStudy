@@ -28,7 +28,7 @@ void CEnemy::setEnemy(int _x, int enemy, int team) {
 	}
 	else {
 		x = _x;
-		y = 24;
+		y = 25;
 
 		bMoveDown = false;
 	}

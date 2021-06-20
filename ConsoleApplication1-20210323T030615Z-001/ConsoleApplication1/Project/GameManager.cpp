@@ -6,6 +6,14 @@
 #include <fstream>
 #include <string>
 
+GameManager::GameManager() {
+	hpSound = new CSound("sounds/hp.mp3", false);
+}
+
+GameManager::~GameManager() {
+	delete hpSound;
+}
+
 void GameManager::startGame() {
 	std::ifstream openFile;
 	std::string s;
@@ -84,6 +92,7 @@ void GameManager::setResetSpeed() {
 
 void GameManager::onDamage() {
 	hp--;
+	hpSound->play();
 }
 void GameManager::DestroyWall(int x, bool isEnemy) {
 	if (isEnemy) {
@@ -142,20 +151,26 @@ void GameManager::showUI() {
 	std::cout << "SOCRE	: " << score;
 	gotoXY(x, y+5);
 	std::cout << "HIGHSOCRE	: " << highscore;
-	gotoXY(x, y+6);
+	gotoXY(x, y + 7);
+	std::cout << "VOLUEM UP	: W";
+	gotoXY(x, y + 8);
+	std::cout << "VOLUEM UP	: S";
+	gotoXY(x, y + 10);
 	std::cout << "EXIT	: Q";
 
-	gotoXY(x, y+8);
+	gotoXY(x, y+12);
 	std::cout << "HELP";
-	gotoXY(x, y+9);
+	gotoXY(x, y+13);
 	std::cout << "ATTACK	: SPACE";
-	gotoXY(x, y+10);
+	gotoXY(x, y+14);
 	std::cout << "MOVE	: RIGHT, LEFT ARROW";
 
-	gotoXY(x, y+12);
+	gotoXY(x, y+15);
 	std::cout << "ENEMY	: destroy wall, kill them!";
-	gotoXY(x, y+13);
+	gotoXY(x, y+16);
 	std::cout << "TEAM	: repair wall, don't Shoot!";
+
+	gotoXY(34, 29);
 }
 
 void GameManager::drawDisplay() {
@@ -186,7 +201,6 @@ void GameManager::drawDisplay() {
 	std::cout << "|                            |" << std::endl;
 	std::cout << "|                            |" << std::endl;
 	std::cout << "|                            |" << std::endl;
-	gotoXY(29, 26);
 }
 void GameManager::drawWall() {
 	gotoXY(0, 26);

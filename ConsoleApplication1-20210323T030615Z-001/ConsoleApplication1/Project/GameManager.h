@@ -1,4 +1,5 @@
 #pragma once
+#include "CSound.h"
 class GameManager
 {
 private:
@@ -13,7 +14,11 @@ private:
 	int teamColor[3] = {1,2,3};
 
 	int wall[15] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+
+	CSound* hpSound;
 public:
+	GameManager();
+	~GameManager();
 	void startGame();
 	bool checkGameOver();
 
