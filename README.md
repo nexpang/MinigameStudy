@@ -9,6 +9,14 @@
 
 [기획 PPT 링크](https://docs.google.com/presentation/d/1z0kYO1fVlEHQ4A2nHjZTZOtBh9jBAEY04vx-BPuNoUE/edit?usp=sharing)
 
+### 게임 설명
+
+게임 우측 UI의 적과 아군 색상을 보고 판단하며 플레이<br/>
+게임창 아래의 벽인 ☆이 적이 닿으면 파괴함<br/>
+벽이 없는 곳에 적군이 넘어갈 시 HP 줄어들고, 아군에 닿으면 수리됨<br/>
+아군을 죽일 시 HP 줄어듬<br/>
+아군을 죽이지말고 적군을 죽여 최대 스코어를 넘겨보자~~
+
 ### 객체 설명
 + ▼: 유닛(적또는 아군 *색으로 구분)<br/>
 	+ 유닛의 위치, 적, 아군 판단 변수, 움직임 구현<br/>
