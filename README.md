@@ -4,6 +4,8 @@
 
 ## Color Shooter
 
+![image](https://user-images.githubusercontent.com/64309516/131824867-35daa6d2-7fc9-403f-a9dc-1920ab6f6b22.png)
+
 [기획 PPT 링크](https://docs.google.com/presentation/d/1z0kYO1fVlEHQ4A2nHjZTZOtBh9jBAEY04vx-BPuNoUE/edit?usp=sharing)
 
 ### 객체 설명
