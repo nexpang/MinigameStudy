@@ -4,6 +4,8 @@
 
 ## Color Shooter
 
+[기획 PPT 링크](https://docs.google.com/presentation/d/1z0kYO1fVlEHQ4A2nHjZTZOtBh9jBAEY04vx-BPuNoUE/edit?usp=sharing)
+
 ### 객체 설명
 + ▼: 유닛(적또는 아군 *색으로 구분)<br/>
 	+ 유닛의 위치, 적, 아군 판단 변수, 움직임 구현<br/>
